@@ -12,6 +12,10 @@ public class SpawnController : MonoBehaviour {
 
     private GameObject PlayerObject;
 
+    public GameObject[] StarPrefabs;
+    public float StarDelayBetweenSpawnsSec = 0.01f;
+    public float StarSpawnVariationSec = 0.02f;
+
     void Awake() {
         instance = this;
     }
@@ -20,6 +24,7 @@ public class SpawnController : MonoBehaviour {
     void Start() {
         GameController.instance.CurrentGameState.RecalculateStats();
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnStars());
     }
 
     // Update is called once per frame
@@ -60,6 +65,25 @@ public class SpawnController : MonoBehaviour {
         Destroy(PlayerObject);
 
         RouletteController.instance.ShowRoulette();
+    }
+	
+    IEnumerator SpawnStars(){
+         while (true) 
+        {
+        Debug.Log("spawning stars");
+            int starToSpawn = Random.Range(0, StarPrefabs.Length);
+            float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+            float vertExtent = Camera.main.orthographicSize;
+            float starSpawnY = Random.Range(-vertExtent, vertExtent);
+
+            Vector3 spawnPosition = new Vector3(10, starSpawnY, 0f);
+
+            Instantiate(StarPrefabs[starToSpawn], spawnPosition, Quaternion.identity);
+
+            float nextSpawn = StarDelayBetweenSpawnsSec + Random.Range(-StarSpawnVariationSec, StarSpawnVariationSec);
+            Debug.Log("Time till next spawn: " + nextSpawn);
+            yield return new WaitForSeconds(nextSpawn);
+        }
     }
 
     public bool IsWaveComplete() {
