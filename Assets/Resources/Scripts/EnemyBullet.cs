@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
 
-    public float MoveRate = 10f;
-    public float MoveVariation = 2f;
-    public float lifeSpan = 2f;
-
+    private float EnemyBulletLifeSpan = 4f;
     private float calculatedMoveSpeed = 0f;
 
 	// Use this for initialization
 	void Start () {
-        calculatedMoveSpeed = Random.Range(MoveRate - MoveVariation, MoveRate + MoveVariation);
+        calculatedMoveSpeed = Random.Range(GameController.instance.CurrentGameState.EnemyBulletMoveRate - GameController.instance.CurrentGameState.EnemyBulletMoveVariation,
+            GameController.instance.CurrentGameState.EnemyBulletMoveRate + GameController.instance.CurrentGameState.EnemyBulletMoveVariation);
 	}
 	
 	// Update is called once per frame
@@ -20,9 +18,8 @@ public class EnemyBullet : MonoBehaviour {
         Vector3 movement = new Vector3(-Time.deltaTime * calculatedMoveSpeed, 0, 0);
         transform.Translate(movement);
 
-        // TODO: Destroy the bullet
-        lifeSpan -= Time.deltaTime;
-        if (lifeSpan <= 0) {
+        EnemyBulletLifeSpan -= Time.deltaTime;
+        if (EnemyBulletLifeSpan <= 0) {
             Destroy(gameObject);
         }
 	}
