@@ -5,6 +5,7 @@ using UnityEngine;
 public class StraightForwardEnemy : MonoBehaviour, IEnemy {
 
     public int Health = 1;
+    public int Shields = 0;
     public float MoveSpeed = 5f;
     public float FireSpeed = 1f;
     public GameObject EnemyBulletPrefab;
@@ -15,11 +16,13 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
 
     public void TakeDamage() {
         if (!isInvulnerable) {
-            Health -= 1;
-
+            if (Shields > 0) {
+                Shields -= 1;
+            } else {
+                Health -= 1;
+            }
             if (Health <= 0) {
-                Debug.Log("StraightForwardEnemy: Blergh.");
-                SpawnController.instance.KillEnemy();
+                GameController.instance.KillEnemy();
                 Destroy(gameObject);
             }
         }
@@ -30,6 +33,9 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
         // Start with an initial delay so that it doesn't shoot off-screen
         // timeSinceLastBullet = FireSpeed;
         isInvulnerable = true;
+        Shields = (Shields + GameController.instance.CurrentGameState.EnemyShieldsModifier) * GameController.instance.CurrentGameState.EnemyShieldsMultiplier;
+        MoveSpeed = (MoveSpeed + GameController.instance.CurrentGameState.EnemyMoveRateModifier) * GameController.instance.CurrentGameState.EnemyMoveRateMultiplier;
+        FireSpeed = (FireSpeed + GameController.instance.CurrentGameState.EnemyFireRateModifier) * GameController.instance.CurrentGameState.EnemyFireRateMultiplier;
 	}
 	
 	// Update is called once per frame
