@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-public interface IRouletteItem {
+public abstract class IRouletteItem : MonoBehaviour {
 
-    void ApplyResult();
+    public abstract void ApplyResult();
+    public abstract string Description();
+    public abstract bool IsOneTime();
 }

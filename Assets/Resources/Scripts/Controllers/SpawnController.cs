@@ -16,6 +16,8 @@ public class SpawnController : MonoBehaviour {
     public float StarDelayBetweenSpawnsSec = 0.01f;
     public float StarSpawnVariationSec = 0.02f;
 
+    public BulletContainer BulletContainer;
+
     void Awake() {
         instance = this;
     }
@@ -25,6 +27,7 @@ public class SpawnController : MonoBehaviour {
         GameController.instance.CurrentGameState.RecalculateStats();
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnStars());
+        BulletContainer = FindObjectOfType<BulletContainer>();
     }
 
     // Update is called once per frame
@@ -41,7 +44,7 @@ public class SpawnController : MonoBehaviour {
             yield return null;
         }
 
-        while (!IsWaveComplete()) {
+        while (!IsWaveComplete() && !GameController.instance.CurrentGameState.IsGameOver) {
             int enemyToSpawn = Random.Range(0, EnemyPrefabs.Length);
 
             float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
@@ -54,7 +57,6 @@ public class SpawnController : MonoBehaviour {
 
             float nextSpawn = GameController.instance.CurrentGameState.DelayBetweenSpawnsSec
                 + Random.Range(-GameController.instance.CurrentGameState.SpawnVariationSec, GameController.instance.CurrentGameState.SpawnVariationSec);
-            Debug.Log("Time till next spawn: " + nextSpawn);
 
             yield return new WaitForSeconds(nextSpawn);
         }
@@ -62,15 +64,20 @@ public class SpawnController : MonoBehaviour {
         foreach (Transform enemy in EnemyContainer.transform) {
             Destroy(enemy.gameObject);
         }
-        Destroy(PlayerObject);
+        foreach (Transform bullet in BulletContainer.transform) {
+            Destroy(bullet.gameObject);
+        }
+        if (PlayerObject != null) {
+            Destroy(PlayerObject);
+        }
 
-        RouletteController.instance.ShowRoulette();
+        if (!GameController.instance.CurrentGameState.IsGameOver) {
+            RouletteController.instance.ShowRoulette();
+        }
     }
 	
-    IEnumerator SpawnStars(){
-         while (true) 
-        {
-        Debug.Log("spawning stars");
+    IEnumerator SpawnStars() {
+         while (true) {
             int starToSpawn = Random.Range(0, StarPrefabs.Length);
             float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
             float vertExtent = Camera.main.orthographicSize;
@@ -81,7 +88,6 @@ public class SpawnController : MonoBehaviour {
             Instantiate(StarPrefabs[starToSpawn], spawnPosition, Quaternion.identity);
 
             float nextSpawn = StarDelayBetweenSpawnsSec + Random.Range(-StarSpawnVariationSec, StarSpawnVariationSec);
-            Debug.Log("Time till next spawn: " + nextSpawn);
             yield return new WaitForSeconds(nextSpawn);
         }
     }
@@ -91,7 +97,6 @@ public class SpawnController : MonoBehaviour {
     }
 
     public void StartNextWave() {
-        Debug.Log("Starting next wave");
         GameController.instance.CurrentGameState.KilledEnemies = 0;
         StartCoroutine(SpawnEnemies());
     }

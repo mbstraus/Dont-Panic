@@ -22,10 +22,32 @@ public class GameController : MonoBehaviour {
 
     public void KillEnemy() {
         CurrentGameState.KilledEnemies += 1;
+
+        CurrentGameState.AddScore();
     }
 
     public void StartNewWave() {
         IsAnimatingGoWindow = true;
         UIController.instance.StartReadyAnimation();
+    }
+
+    public void GameOver() {
+        CurrentGameState.IsGameOver = true;
+        UIController.instance.GameOver();
+    }
+
+    public void RestartGame() {
+        CurrentGameState = new GameState();
+        SpawnController.instance.StartNextWave();
+        UIController.instance.RestartGame();
+    }
+
+    public void TakePlayerDamage() {
+        if (CurrentGameState.CurrentShieldStrength > 0) {
+            CurrentGameState.CurrentShieldStrength -= 1;
+        } else {
+            CurrentGameState.CurrentHullStrength -= 1;
+        }
+        CurrentGameState.ResetScoreMultiplier();
     }
 }
