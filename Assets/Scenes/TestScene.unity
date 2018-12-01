@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -303,13 +303,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbacd3f37bfca1428246bb6c1f0a03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   NumberOfEnemiesToSpawn: 50
   DelayBetweenSpawnsSec: 1
   SpawnVariationSec: 0.2
   EnemiesRemainingText: {fileID: 1317045460}
   EnemyPrefabs:
   - {fileID: 1638509400759374, guid: da229af89e4785a40a4e4588c4a802f7, type: 2}
+  StarPrefabs:
+  - {fileID: 1119294561222988, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
+  - {fileID: 1941148668029902, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
+  - {fileID: 1818810440853570, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
+  - {fileID: 1365821448186634, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
+  - {fileID: 1713507675301232, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
 --- !u!1 &1317045458
 GameObject:
   m_ObjectHideFlags: 0
