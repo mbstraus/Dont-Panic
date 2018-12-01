@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class EnemyBullet : MonoBehaviour {
 
-    public float MoveRate = 25f;
+    public float MoveRate = 10f;
+    public float MoveVariation = 2f;
     public float lifeSpan = 2f;
+
+    private float calculatedMoveSpeed = 0f;
 
 	// Use this for initialization
 	void Start () {
-		
+        calculatedMoveSpeed = Random.Range(MoveRate - MoveVariation, MoveRate + MoveVariation);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 movement = new Vector3(Time.deltaTime * MoveRate, 0, 0);
+        Vector3 movement = new Vector3(-Time.deltaTime * calculatedMoveSpeed, 0, 0);
         transform.Translate(movement);
 
         // TODO: Destroy the bullet
@@ -25,9 +28,9 @@ public class Bullet : MonoBehaviour {
 	}
 
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("ME HIT BAD GUY!");
-        IDamagable hitObject = (IDamagable) collision.gameObject.GetComponent(typeof(IDamagable));
+        Player hitObject = collision.gameObject.GetComponent<Player>();
         if (hitObject != null) {
+            Debug.Log("Enemy Bullet: I hit something!");
             hitObject.TakeDamage();
             Destroy(gameObject);
         }
