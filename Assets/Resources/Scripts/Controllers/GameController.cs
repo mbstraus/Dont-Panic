@@ -42,12 +42,15 @@ public class GameController : MonoBehaviour {
         UIController.instance.RestartGame();
     }
 
-    public void TakePlayerDamage() {
+    public bool TakePlayerDamage() {
+        bool isTakingShieldDamage = false;
         if (CurrentGameState.CurrentShieldStrength > 0) {
             CurrentGameState.CurrentShieldStrength -= 1;
+            isTakingShieldDamage = true;
         } else {
             CurrentGameState.CurrentHullStrength -= 1;
         }
         CurrentGameState.ResetScoreMultiplier();
+        return isTakingShieldDamage;
     }
 }

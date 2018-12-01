@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Player : MonoBehaviour {
 
     public GameObject BulletPrefab;
     private Camera mainCamera;
     private float timeSinceLastBullet = 0f;
+    public GameObject[] ShieldSprites;
+    private bool IsShieldAnimating = false;
 
 	// Use this for initialization
 	void Start () {
         mainCamera = Camera.main;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -52,10 +55,32 @@ public class Player : MonoBehaviour {
     }
 
     public void TakeDamage() {
-        GameController.instance.TakePlayerDamage();
+        if (IsShieldAnimating) {
+            return;
+        }
+
+        bool isTakingShieldDamage = GameController.instance.TakePlayerDamage();
+        if (isTakingShieldDamage) {
+            IsShieldAnimating = true;
+            StartCoroutine(PlayShieldAnimation());
+        }
         if (GameController.instance.CurrentGameState.CurrentHullStrength <= 0) {
             GameController.instance.GameOver();
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator PlayShieldAnimation() {
+        ShieldSprites[0].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        ShieldSprites[0].SetActive(false);
+        ShieldSprites[1].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        ShieldSprites[1].SetActive(false);
+        ShieldSprites[2].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        ShieldSprites[2].SetActive(false);
+
+        IsShieldAnimating = false;
     }
 }
