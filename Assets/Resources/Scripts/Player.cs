@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
     public float MoveFactor = 5f;
     public float FireDelaySec = 0.5f;
     public GameObject BulletPrefab;
+    public int HullHealth = 1;
+    public int ShieldHealth = 3;
+
+    public Text StatusText;
 
     private Camera mainCamera;
     private float timeSinceLastBullet = 0f;
@@ -20,6 +23,8 @@ public class Player : MonoBehaviour {
 	void Update () {
         moveCharacter();
         shootBullet();
+
+        StatusText.text = "Shields: " + ShieldHealth + " - Hull: " + HullHealth;
     }
 
     private void moveCharacter() {
@@ -48,6 +53,18 @@ public class Player : MonoBehaviour {
                 Instantiate(BulletPrefab, transform.position, transform.rotation);
                 timeSinceLastBullet += FireDelaySec;
             }
+        }
+    }
+
+    public void TakeDamage() {
+        if (ShieldHealth > 0) {
+            ShieldHealth -= 1;
+        } else {
+            HullHealth -= 1;
+        }
+        if (HullHealth <= 0) {
+            Debug.Log("Player: Blergh.");
+            Destroy(gameObject);
         }
     }
 }
