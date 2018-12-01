@@ -14,6 +14,8 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
     private float timeSinceLastBullet = 0f;
     private bool isInvulnerable = false;
 
+    private BulletContainer BulletContainer;
+
     public void TakeDamage() {
         if (!isInvulnerable) {
             if (Shields > 0) {
@@ -21,7 +23,7 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
             } else {
                 Health -= 1;
             }
-            if (Health <= 0) {
+            if (Health == 0) {
                 GameController.instance.KillEnemy();
                 Destroy(gameObject);
             }
@@ -36,6 +38,8 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
         Shields = (Shields + GameController.instance.CurrentGameState.EnemyShieldsModifier) * GameController.instance.CurrentGameState.EnemyShieldsMultiplier;
         MoveSpeed = (MoveSpeed + GameController.instance.CurrentGameState.EnemyMoveRateModifier) * GameController.instance.CurrentGameState.EnemyMoveRateMultiplier;
         FireSpeed = (FireSpeed + GameController.instance.CurrentGameState.EnemyFireRateModifier) * GameController.instance.CurrentGameState.EnemyFireRateMultiplier;
+
+        BulletContainer = FindObjectOfType<BulletContainer>();
 	}
 	
 	// Update is called once per frame
@@ -53,7 +57,7 @@ public class StraightForwardEnemy : MonoBehaviour, IEnemy {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
             // Shoot bullet
-            Instantiate(EnemyBulletPrefab, transform.position, transform.rotation);
+            Instantiate(EnemyBulletPrefab, transform.position, transform.rotation, BulletContainer.transform);
             timeSinceLastBullet = FireSpeed;
         }
     }

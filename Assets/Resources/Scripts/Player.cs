@@ -45,20 +45,16 @@ public class Player : MonoBehaviour {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
             if (Input.GetAxisRaw("Fire1") > 0) {
-                Instantiate(BulletPrefab, transform.position, transform.rotation);
+                Instantiate(BulletPrefab, transform.position, transform.rotation, transform);
                 timeSinceLastBullet += GameController.instance.CurrentGameState.PlayerFireDelay;
             }
         }
     }
 
     public void TakeDamage() {
-        if (GameController.instance.CurrentGameState.CurrentShieldStrength > 0) {
-            GameController.instance.CurrentGameState.CurrentShieldStrength -= 1;
-        } else {
-            GameController.instance.CurrentGameState.CurrentHullStrength -= 1;
-        }
+        GameController.instance.TakePlayerDamage();
         if (GameController.instance.CurrentGameState.CurrentHullStrength <= 0) {
-            Debug.Log("Player: Blergh.");
+            GameController.instance.GameOver();
             Destroy(gameObject);
         }
     }

@@ -27,7 +27,6 @@ public class EnemyBullet : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
         Player hitObject = collision.gameObject.GetComponent<Player>();
         if (hitObject != null) {
-            Debug.Log("Enemy Bullet: I hit something!");
             hitObject.TakeDamage();
             Destroy(gameObject);
         }

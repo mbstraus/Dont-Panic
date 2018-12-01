@@ -7,11 +7,11 @@ public class RouletteController : MonoBehaviour {
     public static RouletteController instance;
 
     public GameObject SlotSpinner;
-    public GameObject[] RouletteResultGameObjects;
+    public IRouletteItem[] RouletteResultGameObjects;
     public GameObject RoulettePanel;
     public float SpinAnimationDurationSec = 2f;
 
-    private GameObject currentRouletteItem;
+    public IRouletteItem CurrentRouletteItem;
 
     void Awake() {
         instance = this;
@@ -22,9 +22,9 @@ public class RouletteController : MonoBehaviour {
         StartCoroutine(doRouletteSpin(RouletteResultGameObjects[rouletteResult]));
     }
 
-    IEnumerator doRouletteSpin(GameObject result) {
-        foreach (GameObject go in RouletteResultGameObjects) {
-            go.SetActive(false);
+    IEnumerator doRouletteSpin(IRouletteItem result) {
+        foreach (IRouletteItem go in RouletteResultGameObjects) {
+            go.gameObject.SetActive(false);
         }
         float animationDuration = SpinAnimationDurationSec;
         SlotSpinner.SetActive(true);
@@ -37,8 +37,8 @@ public class RouletteController : MonoBehaviour {
         SlotSpinner.SetActive(false);
 
         // TODO: Here is where we would set some state based on the result.
-        result.SetActive(true);
-        currentRouletteItem = result;
+        result.gameObject.SetActive(true);
+        CurrentRouletteItem = result;
     }
 
     public void ShowRoulette() {
@@ -49,13 +49,26 @@ public class RouletteController : MonoBehaviour {
     }
 
     public void AcceptRoulette() {
-        IRouletteItem item = (IRouletteItem) currentRouletteItem.GetComponent(typeof(IRouletteItem));
+        IRouletteItem item = (IRouletteItem) CurrentRouletteItem.GetComponent(typeof(IRouletteItem));
         item.ApplyResult();
 
-        currentRouletteItem = null;
+        CurrentRouletteItem = null;
         GameController.instance.CurrentGameState.IsDoingRoulette = false;
         SpawnController.instance.StartNextWave();
         GameController.instance.UpdateGameState();
         RoulettePanel.SetActive(false);
+    }
+
+    public void RejectRoulette() {
+        GameController.instance.CurrentGameState.NumberOfEnemiesMultiplier += 1;
+        GameController.instance.CurrentGameState.DelayBetweenSpawnsSec /= 2;
+
+        CurrentRouletteItem = null;
+        GameController.instance.CurrentGameState.IsDoingRoulette = false;
+        SpawnController.instance.StartNextWave();
+        GameController.instance.UpdateGameState();
+        RoulettePanel.SetActive(false);
+
+        GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 2;
     }
 }
