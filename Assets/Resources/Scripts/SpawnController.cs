@@ -9,10 +9,14 @@ public class SpawnController : MonoBehaviour {
     public int NumberOfEnemiesToSpawn = 50;
     public float DelayBetweenSpawnsSec = 0.5f;
     public float SpawnVariationSec = 0.2f;
+    public float StarDelayBetweenSpawnsSec = 0.01f;
+    public float StarSpawnVariationSec = 0.02f;
 
     public Text EnemiesRemainingText;
 
     public GameObject[] EnemyPrefabs;
+
+    public GameObject[] StarPrefabs;
 
     private int killedEnemies = 0;
 
@@ -23,6 +27,7 @@ public class SpawnController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnStars());
     }
 
     // Update is called once per frame
@@ -55,8 +60,27 @@ public class SpawnController : MonoBehaviour {
             }
         }
     }
+    IEnumerator SpawnStars(){
+         while (true) 
+        {
+        Debug.Log("spawning stars");
+            int starToSpawn = Random.Range(0, StarPrefabs.Length);
+            float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+            float vertExtent = Camera.main.orthographicSize;
+            float starSpawnY = Random.Range(-vertExtent, vertExtent);
 
-    public void KillEnemy() {
+            Vector3 spawnPosition = new Vector3(10, starSpawnY, 0f);
+
+            Instantiate(StarPrefabs[starToSpawn], spawnPosition, Quaternion.identity);
+
+            float nextSpawn = StarDelayBetweenSpawnsSec + Random.Range(-StarSpawnVariationSec, StarSpawnVariationSec);
+            Debug.Log("Time till next spawn: " + nextSpawn);
+            yield return new WaitForSeconds(nextSpawn);
+        }
+    }
+
+
+        public void KillEnemy() {
         killedEnemies += 1;
     }
 
