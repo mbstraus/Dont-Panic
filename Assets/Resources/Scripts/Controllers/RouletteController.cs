@@ -6,7 +6,6 @@ public class RouletteController : MonoBehaviour {
 
     public static RouletteController instance;
 
-    public GameObject SlotSpinner;
     public GameObject RoulettePanel;
     public float SpinAnimationDurationSec = 2f;
 
@@ -18,22 +17,12 @@ public class RouletteController : MonoBehaviour {
 
     public void InitiateRouletteSpin() {
         int rouletteResult = Random.Range(0, GameController.instance.GetNumberOfAvailableRouletteItems());
-        StartCoroutine(DoRouletteSpin(GameController.instance.GetRouletteItem(rouletteResult)));
-    }
 
-    IEnumerator DoRouletteSpin(IRouletteItem result) {
         GameController.instance.DisableRouletteItems();
         float animationDuration = SpinAnimationDurationSec;
-        SlotSpinner.SetActive(true);
 
-        while (animationDuration >= 0) {
-            animationDuration -= Time.deltaTime;
-            yield return null;
-        }
+        IRouletteItem result = GameController.instance.GetRouletteItem(rouletteResult);
 
-        SlotSpinner.SetActive(false);
-
-        // TODO: Here is where we would set some state based on the result.
         result.gameObject.SetActive(true);
         CurrentRouletteItem = result;
     }
