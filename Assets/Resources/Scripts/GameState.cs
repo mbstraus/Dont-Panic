@@ -9,7 +9,7 @@ public class GameState {
     public int ScoreMultiplier = 1;
     public int ScoreMultiplerFromSlots = 1;
     public int CurrentScoreChain = 1;
-    public int ScorePerEnemy = 1;
+    public int ScorePerEnemy = 42;
     public int EnemiesKilledWithoutHit = 1;
     public int EnemiesKilledToIncreaseMultiplier = 5;
 
