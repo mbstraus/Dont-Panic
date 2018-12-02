@@ -21,6 +21,9 @@ public class UIController : MonoBehaviour {
     public GameObject ReadyOverlayPanel;
     public GameObject NewGameMenuPanel;
     public GameObject ControlsMenuPanel;
+    public GameObject TopHud;
+    public GameObject BottomHud;
+    public GameObject RoulettePanel;
 
     public GameObject GameOverScreen;
 
@@ -60,6 +63,9 @@ public class UIController : MonoBehaviour {
 
     public void StartReadyAnimation() {
         StartCoroutine(PlayReadyAnimation());
+
+        TopHud.SetActive(true);
+        BottomHud.SetActive(true);
     }
 
     IEnumerator PlayReadyAnimation() {
@@ -85,6 +91,9 @@ public class UIController : MonoBehaviour {
     public void GameOver() {
         GameOverScreen.SetActive(true);
         GunJammedPanel.SetActive(false);
+
+        TopHud.SetActive(false);
+        BottomHud.SetActive(false);
     }
 
     public void RestartGame() {
@@ -102,6 +111,9 @@ public class UIController : MonoBehaviour {
     public void ShowNewGameScreen() {
         GameOverScreen.SetActive(false);
         NewGameMenuPanel.SetActive(true);
+
+        TopHud.SetActive(false);
+        BottomHud.SetActive(false);
     }
 
     public void ShowControlsScreen() {
@@ -112,5 +124,21 @@ public class UIController : MonoBehaviour {
     public void HideControlsScreen() {
         NewGameMenuPanel.SetActive(true);
         ControlsMenuPanel.SetActive(false);
+    }
+
+    public void ShowRoulette() {
+        RoulettePanel.SetActive(true);
+
+        TopHud.SetActive(false);
+        BottomHud.SetActive(false);
+    }
+
+    public void HideRoulette() {
+        RoulettePanel.SetActive(false);
+
+        TopHud.SetActive(true);
+        BottomHud.SetActive(true);
+
+        ResetRouletteText();
     }
 }

@@ -8,6 +8,7 @@ public class Cow : IRouletteItem
     public override void ApplyResult()
     {
         GameController.instance.CurrentGameState.PlayerFireDelay += 0.25f;
+        GameController.instance.CurrentGameState.PlayerBulletMoveRate /= 2;
         GameController.instance.CurrentGameState.CurrentBullet += 1;
         GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 3;
     }

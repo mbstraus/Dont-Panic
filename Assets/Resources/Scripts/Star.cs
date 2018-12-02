@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public class Star : MonoBehaviour {
-    public float MoveFactor = 5f;
+    public float MoveFactor = 3f;
     private Camera mainCamera;
 
     void Start() {
@@ -17,7 +17,7 @@ public class Star : MonoBehaviour {
 	}
 
     private void MoveStarLeft() {
-        float x = -5;
+        float x = -2;
         float y = 0;
 
         Vector3 translate = new Vector2(x * Time.deltaTime * MoveFactor, y);
