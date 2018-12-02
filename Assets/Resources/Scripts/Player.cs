@@ -5,14 +5,25 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     public GameObject BulletPrefab;
+    public GameObject[] ShieldSprites;
+    public SpriteRenderer PlayerGraphics;
+    public Sprite ShipSprite;
+    public Sprite WhaleSprite;
+
     private Camera mainCamera;
     private float timeSinceLastBullet = 0f;
-    public GameObject[] ShieldSprites;
     private bool IsShieldAnimating = false;
+
 
 	// Use this for initialization
 	void Start () {
         mainCamera = Camera.main;
+
+        if (GameController.instance.CurrentGameState.IsPlayerAWhale) {
+            PlayerGraphics.sprite = WhaleSprite;
+        } else {
+            PlayerGraphics.sprite = ShipSprite;
+        }
     }
 	
 	// Update is called once per frame

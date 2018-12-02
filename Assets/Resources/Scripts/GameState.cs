@@ -51,11 +51,11 @@ public class GameState {
     /** PLAYER STATE */
     public int CurrentHullStrength = 1;
     public int BaseShieldStrength = 10;
-    public int CurrentShieldStrength = 3;
+    public int CurrentShieldStrength = 10;
     public int MaxShieldStrength {
         get { return (int) (((float) BaseShieldStrength + PlayerShieldsModifier) * PlayerShieldsMultiplier); }
     }
-    public float PlayerMoveRate = 5f;
+    public float PlayerMoveRate = 10f;
     public float PlayerFireDelay = 0f;
 
     /** PLAYER BULLET */
@@ -79,6 +79,7 @@ public class GameState {
     /** ROULETTE STATE */
     public bool IsDoingRoulette = false;
     public bool IsDroppingPetunias = false;
+    public bool IsPlayerAWhale = false;
 
     public void RecalculateStats() {
         KilledEnemies = 0;
