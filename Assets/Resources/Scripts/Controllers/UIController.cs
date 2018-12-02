@@ -27,6 +27,9 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (GameController.instance == null || GameController.instance.CurrentGameState == null) {
+            return;
+        }
         ShieldsText.text = GameController.instance.CurrentGameState.CurrentShieldStrength.ToString();
         HullText.text = GameController.instance.CurrentGameState.CurrentHullStrength.ToString();
         EnemiesRemainingText.text = Mathf.Clamp(

@@ -11,9 +11,12 @@ public class GameController : MonoBehaviour {
 
     public GameState CurrentGameState;
 
+    public IRouletteItem[] RouletteItems;
+
     void Awake() {
         instance = this;
-        CurrentGameState = new GameState();
+
+        CurrentGameState = new GameState(RouletteItems);
     }
 
     public void UpdateGameState() {
@@ -37,7 +40,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void RestartGame() {
-        CurrentGameState = new GameState();
+        CurrentGameState = new GameState(RouletteItems);
         SpawnController.instance.StartNextWave();
         UIController.instance.RestartGame();
     }
@@ -52,5 +55,24 @@ public class GameController : MonoBehaviour {
         }
         CurrentGameState.ResetScoreMultiplier();
         return isTakingShieldDamage;
+    }
+
+    public int GetNumberOfAvailableRouletteItems() {
+        return CurrentGameState.AvailableRouletteItems.Count;
+    }
+
+    public void RemoveRouletteItem(IRouletteItem item) {
+        item.gameObject.SetActive(false);
+        CurrentGameState.AvailableRouletteItems.Remove(item);
+    }
+
+    public IRouletteItem GetRouletteItem(int index) {
+        return CurrentGameState.AvailableRouletteItems[index];
+    }
+
+    public void DisableRouletteItems() {
+        foreach(IRouletteItem item in CurrentGameState.AvailableRouletteItems) {
+            item.gameObject.SetActive(false);
+        }
     }
 }
