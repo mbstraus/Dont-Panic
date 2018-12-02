@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour {
     public Text GameOverScoreText;
     public Text ScoreMultiplierText;
     public Text RouletteModifierDescription;
+    public Text RouletteModifierTitle;
 
     public GameObject ReadyText;
     public GameObject GoText;
@@ -41,8 +42,14 @@ public class UIController : MonoBehaviour {
         ScoreMultiplierText.text = "x" + scoreMultiplier;
 
         if (RouletteController.instance.CurrentRouletteItem != null) {
-            RouletteModifierDescription.text = RouletteController.instance.CurrentRouletteItem.Description();
+            RouletteModifierDescription.text = RouletteController.instance.CurrentRouletteItem.GetDescription();
+            RouletteModifierTitle.text = RouletteController.instance.CurrentRouletteItem.GetTitle();
         }
+    }
+
+    public void ResetRouletteText() {
+        RouletteModifierDescription.text = "Engaging Improbability Drive...";
+        RouletteModifierTitle.text = "Calculating Unknown Certainties...";
     }
 
     public void StartReadyAnimation() {

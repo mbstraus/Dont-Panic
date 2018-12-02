@@ -79,7 +79,6 @@ public class SpawnController : MonoBehaviour {
     IEnumerator SpawnStars() {
          while (true) {
             int starToSpawn = Random.Range(0, StarPrefabs.Length);
-            float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
             float vertExtent = Camera.main.orthographicSize;
             float starSpawnY = Random.Range(-vertExtent, vertExtent);
 

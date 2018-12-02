@@ -3,6 +3,7 @@
 public abstract class IRouletteItem : MonoBehaviour {
 
     public abstract void ApplyResult();
-    public abstract string Description();
+    public abstract string GetTitle();
+    public abstract string GetDescription();
     public abstract bool IsOneTime();
 }

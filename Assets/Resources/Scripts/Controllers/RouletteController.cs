@@ -17,12 +17,12 @@ public class RouletteController : MonoBehaviour {
         instance = this;
     }
 
-    public void DoRouletteSpin() {
+    public void InitiateRouletteSpin() {
         int rouletteResult = Random.Range(0, RouletteResultGameObjects.Length);
-        StartCoroutine(doRouletteSpin(RouletteResultGameObjects[rouletteResult]));
+        StartCoroutine(DoRouletteSpin(RouletteResultGameObjects[rouletteResult]));
     }
 
-    IEnumerator doRouletteSpin(IRouletteItem result) {
+    IEnumerator DoRouletteSpin(IRouletteItem result) {
         foreach (IRouletteItem go in RouletteResultGameObjects) {
             go.gameObject.SetActive(false);
         }
@@ -45,7 +45,7 @@ public class RouletteController : MonoBehaviour {
         GameController.instance.CurrentGameState.IsDoingRoulette = true;
         RoulettePanel.SetActive(true);
 
-        DoRouletteSpin();
+        InitiateRouletteSpin();
     }
 
     public void AcceptRoulette() {
@@ -57,6 +57,8 @@ public class RouletteController : MonoBehaviour {
         SpawnController.instance.StartNextWave();
         GameController.instance.UpdateGameState();
         RoulettePanel.SetActive(false);
+
+        UIController.instance.ResetRouletteText();
     }
 
     public void RejectRoulette() {
@@ -70,5 +72,7 @@ public class RouletteController : MonoBehaviour {
         RoulettePanel.SetActive(false);
 
         GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 2;
+
+        UIController.instance.ResetRouletteText();
     }
 }
