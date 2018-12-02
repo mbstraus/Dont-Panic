@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
     private Camera mainCamera;
     private float timeSinceLastBullet = 0f;
     private bool IsShieldAnimating = false;
-
+    private float gunJamTimeRemaining = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +23,10 @@ public class Player : MonoBehaviour {
             PlayerGraphics.sprite = WhaleSprite;
         } else {
             PlayerGraphics.sprite = ShipSprite;
+        }
+
+        if (GameController.instance.CurrentGameState.IsPlayerGunJamming) {
+            StartCoroutine(JamGun());
         }
     }
 	
@@ -55,6 +59,16 @@ public class Player : MonoBehaviour {
     }
 
     private void ShootBullet() {
+        if (GameController.instance.CurrentGameState.IsPlayerGunJammed) {
+            gunJamTimeRemaining -= Time.deltaTime;
+            if (gunJamTimeRemaining <= 0f) {
+                GameController.instance.UnjamGun();
+            } else {
+                Debug.Log(gunJamTimeRemaining);
+                return;
+            }
+        }
+
         if (timeSinceLastBullet > 0) {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
@@ -93,5 +107,17 @@ public class Player : MonoBehaviour {
         ShieldSprites[2].SetActive(false);
 
         IsShieldAnimating = false;
+    }
+
+    IEnumerator JamGun() {
+        while (true) {
+            float nextGunJam = Random.Range(GameController.instance.CurrentGameState.PlayerGunJamFrequencySec - GameController.instance.CurrentGameState.PlayerGunJamVariationSec,
+                GameController.instance.CurrentGameState.PlayerGunJamFrequencySec + GameController.instance.CurrentGameState.PlayerGunJamVariationSec);
+            yield return new WaitForSeconds(nextGunJam);
+
+            GameController.instance.JamGun();
+            Debug.Log("Jamming Gun!");
+            gunJamTimeRemaining = GameController.instance.CurrentGameState.PlayerGunJamDurationSec;
+        }
     }
 }

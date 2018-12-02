@@ -57,6 +57,10 @@ public class GameState {
     }
     public float PlayerMoveRate = 10f;
     public float PlayerFireDelay = 0f;
+    public float PlayerGunJamFrequencySec = 15f;
+    public float PlayerGunJamVariationSec = 5f;
+    public float PlayerGunJamDurationSec = 5f;
+    public bool IsPlayerGunJammed = false;
 
     /** PLAYER BULLET */
     public float PlayerBulletMoveRate = 25f;
@@ -80,6 +84,7 @@ public class GameState {
     public bool IsDoingRoulette = false;
     public bool IsDroppingPetunias = false;
     public bool IsPlayerAWhale = false;
+    public bool IsPlayerGunJamming = false;
 
     public void RecalculateStats() {
         KilledEnemies = 0;

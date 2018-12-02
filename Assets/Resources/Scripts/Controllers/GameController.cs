@@ -75,4 +75,13 @@ public class GameController : MonoBehaviour {
             item.gameObject.SetActive(false);
         }
     }
+
+    public void JamGun() {
+        CurrentGameState.IsPlayerGunJammed = true;
+        UIController.instance.ShowGunJamPanel();
+    }
+
+    public void UnjamGun() {
+        UIController.instance.HideGunJamPanel();
+    }
 }

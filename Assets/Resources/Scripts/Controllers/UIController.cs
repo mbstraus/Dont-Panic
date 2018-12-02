@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour {
     public Text RouletteModifierDescription;
     public Text RouletteModifierTitle;
 
+    public GameObject GunJammedPanel;
     public GameObject ReadyText;
     public GameObject GoText;
     public GameObject ReadyOverlayPanel;
@@ -85,5 +86,13 @@ public class UIController : MonoBehaviour {
 
     public void RestartGame() {
         GameOverScreen.SetActive(false);
+    }
+
+    public void ShowGunJamPanel() {
+        GunJammedPanel.SetActive(true);
+    }
+
+    public void HideGunJamPanel() {
+        GunJammedPanel.SetActive(false);
     }
 }
