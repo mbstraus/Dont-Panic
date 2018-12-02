@@ -248,8 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fb3772fff7f884cadd2d6fe61f2636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 1854482227736748, guid: da04e329b4adff347afb55103ce5e2d8,
-    type: 2}
+  BulletPrefab:
+  - {fileID: 1854482227736748, guid: da04e329b4adff347afb55103ce5e2d8, type: 2}
+  - {fileID: 1854482227736748, guid: 48e20629b66f03d439204a57b00d9610, type: 2}
   ShieldSprites:
   - {fileID: 1589882918086478}
   - {fileID: 1765011360458134}

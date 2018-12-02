@@ -124,6 +124,10 @@ public class SpawnController : MonoBehaviour {
                     + Random.Range(-GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec,
                     GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec);
 
+            if (IsWaveComplete() || GameController.instance.CurrentGameState.IsGameOver) {
+                break;
+            }
+
             yield return new WaitForSeconds(nextSpawn);
         }
     }

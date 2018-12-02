@@ -52,6 +52,7 @@ public class GameState {
     public int CurrentHullStrength = 1;
     public int BaseShieldStrength = 10;
     public int CurrentShieldStrength = 10;
+    public int CurrentBullet = 0;
     public int MaxShieldStrength {
         get { return (int) (((float) BaseShieldStrength + PlayerShieldsModifier) * PlayerShieldsMultiplier); }
     }

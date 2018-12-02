@@ -82,6 +82,7 @@ public class UIController : MonoBehaviour {
 
     public void GameOver() {
         GameOverScreen.SetActive(true);
+        GunJammedPanel.SetActive(false);
     }
 
     public void RestartGame() {
