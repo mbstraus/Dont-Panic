@@ -15,7 +15,7 @@ public class GameState {
 
     /** MODIFIERS */
     // Multiplies the player's shield by this number
-    public int PlayerShieldsMultiplier = 1;
+    public float PlayerShieldsMultiplier = 1;
     // Adds to the player's shield by this number
     public int PlayerShieldsModifier = 0;
     // Multiplies the enemy's shield by this number
@@ -38,7 +38,7 @@ public class GameState {
     public int BaseShieldStrength = 10;
     public int CurrentShieldStrength = 3;
     public int MaxShieldStrength {
-        get { return (BaseShieldStrength + PlayerShieldsModifier) * PlayerShieldsMultiplier; }
+        get { return (int) (((float) BaseShieldStrength + PlayerShieldsModifier) * PlayerShieldsMultiplier); }
     }
     public float PlayerMoveRate = 5f;
     public float PlayerFireDelay = 0f;
@@ -50,7 +50,7 @@ public class GameState {
     public int NumberOfEnemiesToSpawn {
         get { return (BaseNumberOfEnemiesToSpawn + NumberOfEnemiesModifier) * NumberOfEnemiesMultiplier;  }
     }
-    public int BaseNumberOfEnemiesToSpawn = 50;
+    public int BaseNumberOfEnemiesToSpawn = 5;
     public float DelayBetweenSpawnsSec = 0.5f;
     public float SpawnVariationSec = 0.2f;
     public int KilledEnemies = 0;

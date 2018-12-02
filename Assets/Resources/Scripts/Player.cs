@@ -19,12 +19,12 @@ public class Player : MonoBehaviour {
 	void Update () {
 
         if (!GameController.instance.CurrentGameState.IsDoingRoulette) {
-            moveCharacter();
-            shootBullet();
+            MoveCharacter();
+            ShootBullet();
         }
     }
 
-    private void moveCharacter() {
+    private void MoveCharacter() {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
         );
     }
 
-    private void shootBullet() {
+    private void ShootBullet() {
         if (timeSinceLastBullet > 0) {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
