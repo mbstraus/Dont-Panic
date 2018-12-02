@@ -7,7 +7,6 @@ public class RouletteController : MonoBehaviour {
     public static RouletteController instance;
 
     public GameObject SlotSpinner;
-    public IRouletteItem[] RouletteResultGameObjects;
     public GameObject RoulettePanel;
     public float SpinAnimationDurationSec = 2f;
 
@@ -18,14 +17,12 @@ public class RouletteController : MonoBehaviour {
     }
 
     public void InitiateRouletteSpin() {
-        int rouletteResult = Random.Range(0, RouletteResultGameObjects.Length);
-        StartCoroutine(DoRouletteSpin(RouletteResultGameObjects[rouletteResult]));
+        int rouletteResult = Random.Range(0, GameController.instance.GetNumberOfAvailableRouletteItems());
+        StartCoroutine(DoRouletteSpin(GameController.instance.GetRouletteItem(rouletteResult)));
     }
 
     IEnumerator DoRouletteSpin(IRouletteItem result) {
-        foreach (IRouletteItem go in RouletteResultGameObjects) {
-            go.gameObject.SetActive(false);
-        }
+        GameController.instance.DisableRouletteItems();
         float animationDuration = SpinAnimationDurationSec;
         SlotSpinner.SetActive(true);
 
@@ -51,6 +48,10 @@ public class RouletteController : MonoBehaviour {
     public void AcceptRoulette() {
         IRouletteItem item = (IRouletteItem) CurrentRouletteItem.GetComponent(typeof(IRouletteItem));
         item.ApplyResult();
+
+        if (item.IsOneTime()) {
+            GameController.instance.RemoveRouletteItem(item);
+        }
 
         CurrentRouletteItem = null;
         GameController.instance.CurrentGameState.IsDoingRoulette = false;

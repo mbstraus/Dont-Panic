@@ -9,6 +9,7 @@ public class SpawnController : MonoBehaviour {
     public GameObject EnemyContainer;
     public GameObject PlayerSpawnLocation;
     public GameObject PlayerPrefab;
+    public GameObject BowlOfPetuniasPrefab;
 
     private GameObject PlayerObject;
 
@@ -18,6 +19,8 @@ public class SpawnController : MonoBehaviour {
 
     public BulletContainer BulletContainer;
 
+    private Camera mainCamera;
+
     void Awake() {
         instance = this;
     }
@@ -25,9 +28,12 @@ public class SpawnController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         GameController.instance.CurrentGameState.RecalculateStats();
+        BulletContainer = FindObjectOfType<BulletContainer>();
+        mainCamera = Camera.main;
+
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnStars());
-        BulletContainer = FindObjectOfType<BulletContainer>();
+
     }
 
     // Update is called once per frame
@@ -91,6 +97,37 @@ public class SpawnController : MonoBehaviour {
         }
     }
 
+    IEnumerator SpawnPetunias() {
+
+        while (GameController.instance.IsAnimatingGoWindow) {
+            yield return null;
+        }
+
+        float nextSpawn = GameController.instance.CurrentGameState.BowlOfPetuniasSpawnFrequencySec
+                + Random.Range(-GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec,
+                GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec);
+
+        yield return new WaitForSeconds(nextSpawn);
+
+        while (!IsWaveComplete() && !GameController.instance.CurrentGameState.IsGameOver) {
+
+            float horzExtent = mainCamera.orthographicSize * Screen.width / Screen.height;
+            float vertExtent = mainCamera.orthographicSize;
+
+            float spawnX = Random.Range(mainCamera.transform.position.x - horzExtent + 0.5f, mainCamera.transform.position.x + horzExtent - 0.5f);
+            float spawnY = mainCamera.transform.position.y + horzExtent - 1f;
+            Vector3 spawnLocation = new Vector3(spawnX, spawnY, 0);
+
+            Instantiate(BowlOfPetuniasPrefab, spawnLocation, Quaternion.identity, BulletContainer.transform);
+
+            nextSpawn = GameController.instance.CurrentGameState.BowlOfPetuniasSpawnFrequencySec
+                    + Random.Range(-GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec,
+                    GameController.instance.CurrentGameState.BowlOfPetuniasSpawnVariabilitySec);
+
+            yield return new WaitForSeconds(nextSpawn);
+        }
+    }
+
     public bool IsWaveComplete() {
         return GameController.instance.CurrentGameState.KilledEnemies >= GameController.instance.CurrentGameState.NumberOfEnemiesToSpawn;
     }
@@ -98,5 +135,8 @@ public class SpawnController : MonoBehaviour {
     public void StartNextWave() {
         GameController.instance.CurrentGameState.KilledEnemies = 0;
         StartCoroutine(SpawnEnemies());
+        if (GameController.instance.CurrentGameState.IsDroppingPetunias) {
+            StartCoroutine(SpawnPetunias());
+        }
     }
 }

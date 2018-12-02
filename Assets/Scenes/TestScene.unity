@@ -489,7 +489,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Some Text Here
+  m_Text: Calculating Unknown Certainties...
 --- !u!222 &292453213
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -529,8 +529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
-  m_SizeDelta: {x: 640, y: 75}
+  m_AnchoredPosition: {x: 0, y: -60.4}
+  m_SizeDelta: {x: 640, y: 120.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &408260001
 MonoBehaviour:
@@ -564,7 +564,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Title Here
+  m_Text: Engaging Improbability Drive...
 --- !u!222 &408260002
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1334,8 +1334,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 970784623}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -590.4257, y: -205.17238, z: 8.25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 697247660}
@@ -1357,6 +1357,8 @@ MonoBehaviour:
   EnemyContainer: {fileID: 1728007425}
   PlayerSpawnLocation: {fileID: 1845756724}
   PlayerPrefab: {fileID: 1791903234389298, guid: 06adf3a7caf991c4494ff3edb0e3ef7c,
+    type: 2}
+  BowlOfPetuniasPrefab: {fileID: 1344096062825170, guid: 2e9d88aac6106bc4aacddfc2e2630d1d,
     type: 2}
   StarPrefabs:
   - {fileID: 1119294561222988, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
@@ -1606,6 +1608,87 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1174697737}
   m_CullTransparentMesh: 0
+--- !u!1 &1300990532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300990533}
+  - component: {fileID: 1300990536}
+  - component: {fileID: 1300990535}
+  - component: {fileID: 1300990534}
+  m_Layer: 5
+  m_Name: Bowl of Petunias
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1300990533
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1300990532}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1758764575}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1300990534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1300990532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93a2fc7d2ad32844958f2ebdc982872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1300990535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1300990532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: c9e3323433e9bdf44b6cb968259d65d7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1300990536
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1300990532}
+  m_CullTransparentMesh: 0
 --- !u!1 &1317045458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,8 +1760,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotSpinner: {fileID: 571520150}
-  RouletteResultGameObjects:
-  - {fileID: 951034781}
   RoulettePanel: {fileID: 1516480513}
   SpinAnimationDurationSec: 2
   CurrentRouletteItem: {fileID: 0}
@@ -1688,8 +1769,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1383173554}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.802124, y: 122.805435, z: 30.573915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 697247660}
@@ -1812,6 +1893,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   IsAnimatingGoWindow: 0
+  RouletteItems:
+  - {fileID: 951034781}
+  - {fileID: 1300990534}
 --- !u!1 &1483407985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,6 +2435,7 @@ RectTransform:
   m_Children:
   - {fileID: 571520151}
   - {fileID: 951034780}
+  - {fileID: 1300990533}
   m_Father: {fileID: 1852897976}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

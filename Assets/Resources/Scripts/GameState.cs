@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class GameState {
 
+    public GameState(IRouletteItem[] rouletteItems) {
+        AvailableRouletteItems = new List<IRouletteItem>(rouletteItems);
+    }
+
+    /*************************************** ROULETTE STATE **************************************/
+    public List<IRouletteItem> AvailableRouletteItems;
+
+    /***************************************** SCORE *********************************************/
     public int Score = 0;
     public bool IsGameOver = false;
     public int ScoreMultiplier = 1;
@@ -32,6 +40,13 @@ public class GameState {
     public float EnemyFireRateModifier = 0;
     public int NumberOfEnemiesModifier = 0;
     public int NumberOfEnemiesMultiplier = 1;
+    // +/- this value on the effects gravity has on the bowl of petunias.
+    public float BowlOfPetuniasDropSpeedRange = 1f;
+    public float BowlOfPetuniasDropSpeed = 10f;
+    // Frequency in which a bowl of petunias spawns (when the modifier has been applied)
+    public float BowlOfPetuniasSpawnFrequencySec = 3f;
+    // Variability in the spawn frequency of the bowl of petunias
+    public float BowlOfPetuniasSpawnVariabilitySec = 1f;
 
     /** PLAYER STATE */
     public int CurrentHullStrength = 1;
@@ -50,7 +65,7 @@ public class GameState {
     public int NumberOfEnemiesToSpawn {
         get { return (BaseNumberOfEnemiesToSpawn + NumberOfEnemiesModifier) * NumberOfEnemiesMultiplier;  }
     }
-    public int BaseNumberOfEnemiesToSpawn = 5;
+    public int BaseNumberOfEnemiesToSpawn = 50;
     public float DelayBetweenSpawnsSec = 0.5f;
     public float SpawnVariationSec = 0.2f;
     public int KilledEnemies = 0;
@@ -63,6 +78,7 @@ public class GameState {
 
     /** ROULETTE STATE */
     public bool IsDoingRoulette = false;
+    public bool IsDroppingPetunias = false;
 
     public void RecalculateStats() {
         KilledEnemies = 0;

@@ -18,6 +18,6 @@ public class ShieldOverloadRoulette : IRouletteItem {
     }
 
     public override bool IsOneTime() {
-        return true;
+        return false;
     }
 }
