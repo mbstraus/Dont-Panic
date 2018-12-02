@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class RouletteController : MonoBehaviour {
 
     public static RouletteController instance;
-
-    public GameObject RoulettePanel;
     public float SpinAnimationDurationSec = 2f;
 
     public IRouletteItem CurrentRouletteItem;
@@ -28,9 +26,6 @@ public class RouletteController : MonoBehaviour {
     }
 
     public void ShowRoulette() {
-        GameController.instance.CurrentGameState.IsDoingRoulette = true;
-        RoulettePanel.SetActive(true);
-
         InitiateRouletteSpin();
     }
 
@@ -46,9 +41,8 @@ public class RouletteController : MonoBehaviour {
         GameController.instance.CurrentGameState.IsDoingRoulette = false;
         SpawnController.instance.StartNextWave();
         GameController.instance.UpdateGameState();
-        RoulettePanel.SetActive(false);
 
-        UIController.instance.ResetRouletteText();
+        UIController.instance.HideRoulette();
     }
 
     public void RejectRoulette() {
@@ -59,10 +53,8 @@ public class RouletteController : MonoBehaviour {
         GameController.instance.CurrentGameState.IsDoingRoulette = false;
         SpawnController.instance.StartNextWave();
         GameController.instance.UpdateGameState();
-        RoulettePanel.SetActive(false);
+        UIController.instance.HideRoulette();
 
         GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 2;
-
-        UIController.instance.ResetRouletteText();
     }
 }

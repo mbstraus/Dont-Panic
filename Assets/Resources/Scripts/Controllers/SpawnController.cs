@@ -75,6 +75,7 @@ public class SpawnController : MonoBehaviour {
         }
 
         if (!GameController.instance.CurrentGameState.IsGameOver) {
+            UIController.instance.ShowRoulette();
             RouletteController.instance.ShowRoulette();
         }
     }
