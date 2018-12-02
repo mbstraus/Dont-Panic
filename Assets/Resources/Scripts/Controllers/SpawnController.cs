@@ -30,10 +30,7 @@ public class SpawnController : MonoBehaviour {
         GameController.instance.CurrentGameState.RecalculateStats();
         BulletContainer = FindObjectOfType<BulletContainer>();
         mainCamera = Camera.main;
-
-        StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnStars());
-
     }
 
     // Update is called once per frame
