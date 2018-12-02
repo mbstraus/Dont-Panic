@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    public GameObject BulletPrefab;
+    public GameObject[] BulletPrefab;
     public GameObject[] ShieldSprites;
     public SpriteRenderer PlayerGraphics;
     public Sprite ShipSprite;
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
             if (Input.GetAxisRaw("Fire1") > 0) {
-                Instantiate(BulletPrefab, transform.position, transform.rotation, transform);
+                Instantiate(BulletPrefab[GameController.instance.CurrentGameState.CurrentBullet], transform.position, transform.rotation);
                 timeSinceLastBullet += GameController.instance.CurrentGameState.PlayerFireDelay;
             }
         }

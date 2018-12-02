@@ -7,11 +7,11 @@ public class BlueWhaleRoulette : IRouletteItem {
     public override void ApplyResult() {
         GameController.instance.CurrentGameState.IsPlayerAWhale = true;
         GameController.instance.CurrentGameState.PlayerMoveRate /= 2;
-        GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 2;
+        GameController.instance.CurrentGameState.ScoreMultiplerFromSlots += 3;
     }
 
     public override string GetDescription() {
-        return "Player turns into a Blue Whale\nMovement Speed 1/2\nScore Multiplier +2";
+        return "Player turns into a Blue Whale\nMovement Speed 1/2\nScore Multiplier +3";
     }
 
     public override string GetTitle() {
