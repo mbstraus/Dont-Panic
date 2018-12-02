@@ -19,6 +19,8 @@ public class UIController : MonoBehaviour {
     public GameObject ReadyText;
     public GameObject GoText;
     public GameObject ReadyOverlayPanel;
+    public GameObject NewGameMenuPanel;
+    public GameObject ControlsMenuPanel;
 
     public GameObject GameOverScreen;
 
@@ -86,7 +88,7 @@ public class UIController : MonoBehaviour {
     }
 
     public void RestartGame() {
-        GameOverScreen.SetActive(false);
+        NewGameMenuPanel.SetActive(false);
     }
 
     public void ShowGunJamPanel() {
@@ -95,5 +97,20 @@ public class UIController : MonoBehaviour {
 
     public void HideGunJamPanel() {
         GunJammedPanel.SetActive(false);
+    }
+
+    public void ShowNewGameScreen() {
+        GameOverScreen.SetActive(false);
+        NewGameMenuPanel.SetActive(true);
+    }
+
+    public void ShowControlsScreen() {
+        NewGameMenuPanel.SetActive(false);
+        ControlsMenuPanel.SetActive(true);
+    }
+
+    public void HideControlsScreen() {
+        NewGameMenuPanel.SetActive(true);
+        ControlsMenuPanel.SetActive(false);
     }
 }

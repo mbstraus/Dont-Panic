@@ -70,7 +70,7 @@ public class GameState {
     public int NumberOfEnemiesToSpawn {
         get { return (BaseNumberOfEnemiesToSpawn + NumberOfEnemiesModifier) * NumberOfEnemiesMultiplier;  }
     }
-    public int BaseNumberOfEnemiesToSpawn = 50;
+    public int BaseNumberOfEnemiesToSpawn = 5;
     public float DelayBetweenSpawnsSec = 0.5f;
     public float SpawnVariationSec = 0.2f;
     public int KilledEnemies = 0;
