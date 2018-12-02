@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
     public GameObject[] BulletPrefab;
     public GameObject[] ShieldSprites;
+    public GameObject[] ExplosionSprites;
     public SpriteRenderer PlayerGraphics;
     public Sprite ShipSprite;
     public Sprite WhaleSprite;
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour {
     private float timeSinceLastBullet = 0f;
     private bool IsShieldAnimating = false;
     private float gunJamTimeRemaining = 0f;
+    private bool IsDestroying = false;
+    private float DestroyingTimeRemaining = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -32,8 +35,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (!GameController.instance.CurrentGameState.IsDoingRoulette) {
+        if (!GameController.instance.CurrentGameState.IsDoingRoulette && !IsDestroying) {
             MoveCharacter();
             ShootBullet();
         }
@@ -90,8 +92,8 @@ public class Player : MonoBehaviour {
             StartCoroutine(PlayShieldAnimation());
         }
         if (GameController.instance.CurrentGameState.CurrentHullStrength <= 0) {
-            GameController.instance.GameOver();
-            Destroy(gameObject);
+            IsDestroying = true;
+            StartCoroutine(PlayDeathAnimation());
         }
     }
 
@@ -107,6 +109,22 @@ public class Player : MonoBehaviour {
         ShieldSprites[2].SetActive(false);
 
         IsShieldAnimating = false;
+    }
+
+    IEnumerator PlayDeathAnimation() {
+        PlayerGraphics.gameObject.SetActive(false);
+
+        ExplosionSprites[0].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        ExplosionSprites[0].SetActive(false);
+        ExplosionSprites[1].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        ExplosionSprites[1].SetActive(false);
+        ExplosionSprites[2].SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+
+        GameController.instance.GameOver();
+        Destroy(gameObject);
     }
 
     IEnumerator JamGun() {
