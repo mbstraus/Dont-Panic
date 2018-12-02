@@ -25,6 +25,9 @@ public class StraightForwardEnemy : IEnemy {
     }
 
     void Update() {
+        if (isExploding) {
+            return;
+        }
         // Custom logic for how this enemy moves
         Vector3 moveVector = new Vector3(-Time.deltaTime * MoveSpeed, 0, 0);
         transform.Translate(moveVector);

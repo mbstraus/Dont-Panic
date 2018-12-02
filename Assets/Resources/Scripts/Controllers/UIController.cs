@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour {
             return;
         }
         ShieldsText.text = GameController.instance.CurrentGameState.CurrentShieldStrength.ToString();
-        HullText.text = GameController.instance.CurrentGameState.CurrentHullStrength.ToString();
+        HullText.text = Mathf.Clamp(GameController.instance.CurrentGameState.CurrentHullStrength, 0, int.MaxValue).ToString();
         EnemiesRemainingText.text = Mathf.Clamp(
                 GameController.instance.CurrentGameState.NumberOfEnemiesToSpawn - GameController.instance.CurrentGameState.KilledEnemies,
                 0,
