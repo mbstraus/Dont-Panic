@@ -109,7 +109,7 @@ public class SpawnController : MonoBehaviour {
 
         yield return new WaitForSeconds(nextSpawn);
 
-        while (!IsWaveComplete() && !GameController.instance.CurrentGameState.IsGameOver) {
+        while (!IsWaveComplete() && !GameController.instance.CurrentGameState.IsGameOver && GameController.instance.CurrentGameState.IsDroppingPetunias) {
 
             float horzExtent = mainCamera.orthographicSize * Screen.width / Screen.height;
             float vertExtent = mainCamera.orthographicSize;
