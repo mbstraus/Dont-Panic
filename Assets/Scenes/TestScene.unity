@@ -1366,7 +1366,7 @@ MonoBehaviour:
   - {fileID: 1713507675301232, guid: 4fe08f92cc25c9641bc686976eee3854, type: 2}
   StarDelayBetweenSpawnsSec: 0.01
   StarSpawnVariationSec: 0.02
-  BulletContainer: {fileID: 0}
+  BulletContainer: {fileID: 219152608}
 --- !u!1 &980373266
 GameObject:
   m_ObjectHideFlags: 0
