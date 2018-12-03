@@ -21,10 +21,10 @@ public class UIController : MonoBehaviour {
     public GameObject ReadyOverlayPanel;
     public GameObject NewGameMenuPanel;
     public GameObject ControlsMenuPanel;
+    public GameObject OptionsMenuPanel;
     public GameObject TopHud;
     public GameObject BottomHud;
     public GameObject RoulettePanel;
-
     public GameObject GameOverScreen;
 
     void Awake() {
@@ -124,6 +124,16 @@ public class UIController : MonoBehaviour {
     public void HideControlsScreen() {
         NewGameMenuPanel.SetActive(true);
         ControlsMenuPanel.SetActive(false);
+    }
+
+    public void ShowOptionsScreen() {
+        NewGameMenuPanel.SetActive(false);
+        OptionsMenuPanel.SetActive(true);
+    }
+
+    public void HideOptionsScreen() {
+        NewGameMenuPanel.SetActive(true);
+        OptionsMenuPanel.SetActive(false);
     }
 
     public void ShowRoulette() {

@@ -116,6 +116,7 @@ public class SpawnController : MonoBehaviour {
             float spawnY = mainCamera.transform.position.y + horzExtent - 1f;
             Vector3 spawnLocation = new Vector3(spawnX, spawnY, 0);
 
+            SoundController.instance.PlayPetuniasSound();
             Instantiate(BowlOfPetuniasPrefab, spawnLocation, Quaternion.identity, BulletContainer.transform);
 
             nextSpawn = GameController.instance.CurrentGameState.BowlOfPetuniasSpawnFrequencySec

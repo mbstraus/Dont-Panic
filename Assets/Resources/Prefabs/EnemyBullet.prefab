@@ -128,8 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fda9add98f2e646a1db38881a0ef3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: 10
-  lifeSpan: 2
 --- !u!212 &212378495449649504
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -165,7 +163,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 45031315774d24745a6d03a9afb41a62, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aa39dfedf4b43544841a7d51dbc0b2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -11,7 +11,7 @@ public class BlueWhaleRoulette : IRouletteItem {
     }
 
     public override string GetDescription() {
-        return "Player turns into a Blue Whale\nMovement Speed 1/2\nScore Multiplier +3";
+        return "Player turns into a Sperm Whale\nMovement Speed 1/2\nScore Multiplier +3";
     }
 
     public override string GetTitle() {
