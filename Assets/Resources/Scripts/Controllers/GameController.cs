@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour {
 
     public void StartNewWave() {
         IsAnimatingGoWindow = true;
+        SoundController.instance.PlayReadyGoSound();
         UIController.instance.StartReadyAnimation();
     }
 

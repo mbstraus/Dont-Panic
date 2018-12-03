@@ -75,6 +75,7 @@ public class Player : MonoBehaviour {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
             if (Input.GetAxisRaw("Fire1") > 0) {
+                SoundController.instance.PlayPlayerShoot();
                 Instantiate(BulletPrefab[GameController.instance.CurrentGameState.CurrentBullet], transform.position, transform.rotation);
                 timeSinceLastBullet += GameController.instance.CurrentGameState.PlayerFireDelay;
             }
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour {
 
         bool isTakingShieldDamage = GameController.instance.TakePlayerDamage();
         if (isTakingShieldDamage) {
+            SoundController.instance.PlayShieldHit();
             IsShieldAnimating = true;
             StartCoroutine(PlayShieldAnimation());
         }
@@ -99,31 +101,33 @@ public class Player : MonoBehaviour {
 
     IEnumerator PlayShieldAnimation() {
         ShieldSprites[0].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         ShieldSprites[0].SetActive(false);
         ShieldSprites[1].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         ShieldSprites[1].SetActive(false);
         ShieldSprites[2].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         ShieldSprites[2].SetActive(false);
 
         IsShieldAnimating = false;
     }
 
     IEnumerator PlayDeathAnimation() {
+        SoundController.instance.PlayPlayerDeath();
         PlayerGraphics.gameObject.SetActive(false);
 
         ExplosionSprites[0].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         ExplosionSprites[0].SetActive(false);
         ExplosionSprites[1].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         ExplosionSprites[1].SetActive(false);
         ExplosionSprites[2].SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
         GameController.instance.GameOver();
+        SoundController.instance.StopPlayerDeathSound();
         Destroy(gameObject);
     }
 

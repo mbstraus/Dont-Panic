@@ -40,6 +40,7 @@ public class StraightForwardEnemy : IEnemy {
         if (timeSinceLastBullet > 0) {
             timeSinceLastBullet -= Time.deltaTime;
         } else {
+            SoundController.instance.PlayEnemyLaserShoot();
             Instantiate(EnemyBulletPrefab, transform.position, transform.rotation, BulletContainer.transform);
             timeSinceLastBullet = FireSpeed;
         }

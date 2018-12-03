@@ -65,6 +65,7 @@ public abstract class IEnemy : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         GameController.instance.KillEnemy();
+        SoundController.instance.PlayEnemyDeathSound();
         Destroy(gameObject);
     }
 
@@ -72,7 +73,8 @@ public abstract class IEnemy : MonoBehaviour {
         Player hitObject = collision.gameObject.GetComponent<Player>();
         if (hitObject != null) {
             hitObject.TakeDamage();
-            Destroy(gameObject);
+
+            StartCoroutine(PlayDeathAnimation());
         }
     }
 }
