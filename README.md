@@ -1,2 +1,9 @@
-# LudumDare43
-Game for the Game Jam Ludum Dare, #43
+# Don't Panic
+You just wanted to borrow the ship, you swear!  It wasn't your fault that the ship was heavily guarded, and that said guards didn't want you to steal the ship...  But that's all water under the bridge now.  Using the improbability drive installed on the ship, you try and escape your pursuers, but somehow they keep finding you.  And strange things happen every time you engage the drive.  Things like shooting cows instead of laser shots, or bowls of petunias falling from the sky (while in the middle of space...?), or even just transforming into a sperm whale.  Is there any hope of escape from these relentless pursuers?
+
+Fly your ship in a side-scrolling shoot-em-up style game with heavy Hitchiker's Guide to the Galaxy references.  Defeat your pursuers as your improbability drive charges, trying to get as high a score as possible.  After each engagement of the improbability drive, you will need to choose from a variety of side-effects that impact both the game play, as well as your score modifier.
+
+This game was originally developed for the Ludum Dare 43 game jam, where it was made from scratch in 48 hours, using the theme "Sacrifices must be made".  The original game was done as a 2D style game with developer graphics.  This game is being remade using free / home made 3D assets, and a completely re-architected code base to better support enemy variety and modifier variety, as well as taking feedback from the original submission (such as removing the need of holding a key down for shooting).  The engine version used by the game has also been upgraded and the code has been changed to take advantage of the newer Unity features.
+
+* You can see the original version of the game under the 0.1 tag release.  The Ludum Dare submission page can be found here: https://ldjam.com/events/ludum-dare/43/dont-panic, and the web version of the game can be played here: https://doomshmuck.itch.io/ludum-dare-43
+* The game has been re-written from the ground up after the game jam into a more complete version.  This version is still in development.
