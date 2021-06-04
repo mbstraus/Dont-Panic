@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Don't Panic, a shoot-em-up game with jokes from Hitchiker's Guide to the Galaxy
  * Copyright (C) 2021 Mathew Strauss
  * 
@@ -18,32 +18,25 @@
  */
 using UnityEngine;
 
-public class PlayerBullet : MonoBehaviour {
+public class EnemyWaveController : MonoBehaviour
+{
+    public EnemyWaveScriptableObject TestWave;
 
-    private float PlayerBulletLifeSpan = 2f;
-
-    public float BulletMoveRate {
-        get; set;
+    public void SpawnWave() {
+        GameObject prefab = Resources.Load<GameObject>(TestWave.PathToPrefab);
+        if (prefab == null) {
+            Debug.LogError("Failed to find prefab at " + TestWave.PathToPrefab);
+        }
+        
+        foreach (Vector3 spawnLocation in TestWave.SpawnPoints) {
+            if (isSpawnLocationOccupied(spawnLocation)) {
+                continue;
+            }
+            Instantiate(prefab, spawnLocation, Quaternion.identity, transform);
+        }
     }
 
-    private void Update () {
-        Vector3 movement = new Vector3(Time.deltaTime * BulletMoveRate, 0, 0);
-        transform.Translate(movement);
-        PlayerBulletLifeSpan -= Time.deltaTime;
-        if (PlayerBulletLifeSpan <= 0) {
-            Destroy(gameObject);
-        }
-	}
-
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log("Collided - " + collision.gameObject.name);
-
-        GameObject go = collision.gameObject;
-        Enemy enemy = go.GetComponent<Enemy>();
-        if (enemy != null) {
-            enemy.TakeDamage(1);
-        }
-
-        Destroy(gameObject);
+    private bool isSpawnLocationOccupied(Vector3 spawnLocation) {
+        return false;
     }
 }

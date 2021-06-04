@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1175619367607925950}
   - component: {fileID: 3260953317250745244}
   - component: {fileID: 367790642160527860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player Spaceship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,6 +53,7 @@ MonoBehaviour:
   TimeBetweenShots: 0.1
   PlayerBulletPrefab: {fileID: 114468355724617952, guid: da04e329b4adff347afb55103ce5e2d8,
     type: 3}
+  BulletContainer: {fileID: 0}
 --- !u!65 &367790642160527860
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5822170298984869205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shot Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,10 +159,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4ebf052d4899f9b44ba7d0d73b860bdf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d756216c90415f24b8c4a9d70d6b05e5, type: 2}
     - target: {fileID: 919132149155446097, guid: 4ebf052d4899f9b44ba7d0d73b860bdf,
         type: 3}
       propertyPath: m_Name
       value: craft_speederA
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4ebf052d4899f9b44ba7d0d73b860bdf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebf052d4899f9b44ba7d0d73b860bdf, type: 3}

@@ -80,17 +80,16 @@ namespace mbstraus.DontPanic.Player
         #region Update handlers
         private void DoMoveCharacter() {
             Vector3 translate = new Vector2(movement.x * Time.deltaTime * PlayerMoveRate, movement.y * Time.deltaTime * PlayerMoveRate);
-
-            float horzExtent = mainCamera.orthographicSize * Screen.width / Screen.height;
-            float vertExtent = mainCamera.orthographicSize;
-
             Vector3 newPosition = gameObject.transform.position + translate;
-
-            transform.position = new Vector3(
-                Mathf.Clamp(newPosition.x, mainCamera.transform.position.x - horzExtent + 0.5f, mainCamera.transform.position.x + horzExtent - 0.5f),
-                Mathf.Clamp(newPosition.y, mainCamera.transform.position.y - vertExtent + 0.5f, mainCamera.transform.position.y + vertExtent - 0.5f),
-                transform.position.z
-            );
+            var direction = (newPosition - transform.position).normalized;
+            var distance = Vector3.Distance(transform.position, newPosition);
+            Ray ray = new Ray(transform.position, direction);
+            Debug.DrawRay(transform.position, direction);
+            bool raycastHit = Physics.Raycast(ray, distance, LayerMask.GetMask("Border"));
+            if (raycastHit) {
+                return;
+            }
+            transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
             if (movement.y != 0 && !isRotated) {
                 float xRotation = PlayerMoveRotation;
